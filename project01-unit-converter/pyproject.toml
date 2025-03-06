@@ -7,7 +7,7 @@ authors = [
     { name = "Aliyano0", email = "aliyanaqeel97@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = ["pint==0.24.4"]
 
 [project.scripts]
 project01-unit-converter = "project01_unit_converter:main"

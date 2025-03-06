@@ -38,7 +38,7 @@ unit_from = st.selectbox("From:", unit_types[option])
 unit_to = st.selectbox("To:", unit_types[option])
 
 # Input value
-value = st.number_input("Enter a value:", min_value=0.0)
+value = st.number_input("Enter a value:", min_value=1.0)
 
 # Conversion Logic
 if st.button(f"Convert {unit_from} to {unit_to}"):

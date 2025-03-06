@@ -1,4 +1,6 @@
+import os
 import streamlit as st
+os.system("uv pip install pint")
 from pint import UnitRegistry
 
 # Initialize Unit Registry

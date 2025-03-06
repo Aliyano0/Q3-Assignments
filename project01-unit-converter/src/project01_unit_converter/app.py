@@ -1,4 +1,3 @@
-import pint
 import streamlit as st
 from pint import UnitRegistry
 

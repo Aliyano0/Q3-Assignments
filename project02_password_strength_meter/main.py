@@ -1,6 +1,5 @@
 import re
 import streamlit as st
-import math 
 import random
 
 st.set_page_config(page_title="🦾 Password Strength Meter", layout="wide")
@@ -14,10 +13,11 @@ button = st.button("Check Strength")
 
 st.write(f"Your Password Length: {len(password)}")
 
+# PASSWORD SUGGESTION
+
 def suggest_password():
     # String Setup
     pass_str: str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789[!@#$%^&*]"
-    str_length: int = len(pass_str)
 
     # Random Length for suggested password
     password_length: int = random.randint(15,24)
@@ -27,13 +27,13 @@ def suggest_password():
     # Iterating the random int from password lentgh.
     for i in range(password_length):
 
-        # Getting random index in each iteration.
-        random_index: int =  math.floor(random.random()*str_length)
-
         # Concatenating previous string and new character at the random index in each iteration.
-        suggested_password += pass_str[random_index]
+        suggested_password += random.choice(pass_str)
     
     st.info(f"🔑 Suggested Password: {suggested_password}")
+
+
+# CHECK PASSWORD STREGTH FUNCTION
 
 def check_password_strength(password):
     score = 0

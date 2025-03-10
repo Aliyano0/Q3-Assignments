@@ -37,7 +37,28 @@ def suggest_password():
 
 def check_password_strength(password):
     score = 0
-    
+    common_passwords = [
+    "123456",
+    "password",
+    "123456789",
+    "12345678",
+    "12345",
+    "111111",
+    "1234567",
+    "qwerty",
+    "abc123",
+    "password1",
+    "123123",
+    "admin",
+    "qwerty123",
+    "1q2w3e4r",
+    "iloveyou",
+    "letmein",
+    "welcome",
+    "monkey",
+    "football",
+    "dragon"
+]
     # Length Check
     if len(password) >= 8:
         score += 1
@@ -68,8 +89,9 @@ def check_password_strength(password):
 
 
     # Common Passwords
-    if password == "Password123$" or password == "Qwerty123@":
-        st.error("❌ Your password is too common!")
+    for common in common_passwords:
+        if password == common:
+            st.error("❌ Your password is too common!")
     
     # Strength Rating
     if len(password) < 1:

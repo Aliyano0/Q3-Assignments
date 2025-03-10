@@ -1,1 +1,1 @@
-# Password Strength Meter using UV and Streamlit in Python.
+# [Password Strength Meter using UV and Streamlit in Python.](./main.py)

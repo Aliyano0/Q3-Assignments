@@ -11,6 +11,8 @@ password: str = st.text_input("Enter your password", type="password")
 
 button = st.button("Check Strength")
 
+    
+
 st.write(f"Your Password Length: {len(password)}")
 
 # PASSWORD SUGGESTION
@@ -109,4 +111,7 @@ def check_password_strength(password):
 
 # Get user input
 if button:
-    check_password_strength(password)
+    if len(password) < 1:
+        st.error("Enter your password first!!")
+    else:
+        check_password_strength(password)

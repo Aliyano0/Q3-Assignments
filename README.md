@@ -5,3 +5,5 @@
 - [Unit_Converter](./project01-unit-converter/app.py)
 
 - [Password_Strength_Meter](./project02_password_strength_meter/main.py)
+
+- [Personal_Library_Manager](./project03_personal_library_manager/library_manager.py)

@@ -1,0 +1,16 @@
+[
+    {
+        "title": "Harry Potter and the Chamber of Secrets",
+        "author": "J.K. Rowling",
+        "publish_year": "1998",
+        "genre": "Fantasy",
+        "is_read": "Read"
+    },
+    {
+        "title": "Harry Potter and the Deathly Hallows",
+        "author": "J.K. Rowling",
+        "publish_year": "2007",
+        "genre": "Fantasy, Fiction",
+        "is_read": "Read"
+    }
+]

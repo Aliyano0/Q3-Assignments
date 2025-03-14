@@ -1,51 +1,72 @@
-##  ##  ##  ##  Function to display all books  ##  ##  ##
-books_list = []
+import os
+import json
 
+
+DATA_FILE = "book_data.json"
+
+##  ##  ## Function to load books from file ##  ##  ##
+def load_books():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as file:
+            return json.load(file)
+    return []
+
+books_list = load_books()
+
+##  ##  ##  Function to save books to file  ##  ##  ## 
+def save_books(books):
+    with open(DATA_FILE, "w") as file:
+        json.dump(books, file, indent=4)
 
 
 ##  ##  ##  ##  Function to search book  ##  ##  ##
 def search_book():
-    # Getting search option by the user.
-    print("1. Search by Title.")
-    print("2. Search by Author.")
-    search_input: int = input("\nEnter your choice: ")
+    while True:
+        print("\n==== SEARCH BOOKS ====")
+        print("1. Search by Title")
+        print("2. Search by Author")
+        print("0. Return to Main Menu")
 
-    # Added an additional input type check.
-    if search_input.isdigit():
-        # Checking if the user has entered option 1.
+        search_input = input("\nEnter your choice: ").strip()
+
         if search_input == "1":
-            # Getting search input
-            search_query = input("\nSearch book by Name: ")
-            # Looping through the List of Dictionaries.
-            print("Search results: ")
-            for book in books_list:
-                # Checking if the search input is present in the library list.
-                if book["title"] == search_query:
-                    print(f"\t{book["title"]} by {book["author"]} ({book["publish_year"]}) - {book["genre"]}, {book["is_read"]}")
-                # Throwing error if the search input is not present in the list.
-                else:
-                    print("Search results: ")
-                    print("\nBook not found!")
-        # Checking if the user has entered option 2.
+            search_query = input("\nEnter part of the book title to search: ").strip().lower()
+
+            # Filter matching books
+            found_books = [
+                book for book in books_list
+                if search_query in book["title"].lower()
+            ]
+
+            if found_books:
+                print(f"\nFound {len(found_books)} book(s):")
+                for index, book in enumerate(found_books, 1):
+                    print(f"\t{index}. {book['title']} by {book['author']} ({book['publish_year']}) - {book['genre']}, {book['is_read']}")
+            else:
+                print("\nNo books found with that title.")
+
         elif search_input == "2":
-            # Getting search input
-            search_query = input("\nSearch book by Author: ")
-            # Looping through the List of Dictionaries.
-            print("Search results: ")
-            for book in books_list:
-                # Checking if the search input is present in the library list.
-                if book["author"] == search_query:
-                    print(f"\t{book["title"]} by {book["author"]} ({book["publish_year"]}) - {book["genre"]}, {book["is_read"]}")
-                # Throwing error if the search input is not present in the list.
-                else:
-                    print("Search results: ")
-                    print("\nBook not found!")          
-        # Throwing error if user has not entered the valid option.
+            search_query = input("\nEnter part of the author name to search: ").strip().lower()
+
+            # Filter matching books
+            found_books = [
+                book for book in books_list
+                if search_query in book["author"].lower()
+            ]
+
+            if found_books:
+                print(f"\nFound {len(found_books)} book(s):")
+                for index, book in enumerate(found_books, 1):
+                    print(f"\t{index}. {book['title']} by {book['author']} ({book['publish_year']}) - {book['genre']}, {book['is_read']}")
+            else:
+                print("\nNo books found by that author.")
+
+        elif search_input == "0":
+            print("\nReturning to the main menu.")
+            break
+
         else:
-            print("\nEnter a valid option!")
-    # Throwing error if user has not entered the valid option.
-    else:
-        print("\nEnter a valid option!!!")
+            print("\nPlease enter a valid option (1, 2, or 0).")
 
 
 
@@ -75,10 +96,12 @@ Percentage read: {read_percentage:.2f}%
 def list_all_books():
     # Checking if the list isn't empty.
     if books_list:
-        print(f"Books quantity: {len(books_list)}")
-        # Looping through the list to display the data
-        for book in books_list:
-            print(f"\t{book["title"]} by {book["author"]} ({book["publish_year"]}) - {book["genre"]}, {book["is_read"]}")
+        print(f"\nBooks quantity: {len(books_list)}")
+        
+        # Using enumerate to loop through the list and get the index
+        for index, book in enumerate(books_list, start=1):
+            print(f"\t{index}. {book['title']} by {book['author']} ({book['publish_year']}) - {book['genre']}, {book['is_read']}")
+    
     # Error if the library is empty
     else:
         print("⚠ Library is empty. Add a book first!")
@@ -88,7 +111,10 @@ def list_all_books():
 ##  ##  ##  ##  Function to add a book  ##  ##  ##
 def add_book():
     title: str = input("Enter the Book Title: ")
+    # Stripping whitespaces from left and right of the strings.
+    title = title.strip()
     author: str = input("Enter Author's name: ")
+    author = author.strip()
     # Getting a Publish year in int and implemented type checking.
     while True:    
         publish_year: int = input("Enter the Publication year: ")
@@ -97,6 +123,7 @@ def add_book():
         else: 
             print("Enter a valid year!")
     genre: str = input("Enter the Genre: ")
+    genre = genre.strip()
     while True:
         read_status: str = input("Have you read this book? (yes/y OR no/n): ")
         is_read: str = "Unread"
@@ -127,7 +154,8 @@ def add_book():
 ##  ##  ##  ##  Function to remove a book  ##  ##  ##
 def remove_book():
   # Getting input to remove the book
-  search_input = input("\nEnter the title of a book you want to remove: ")
+  search_input: str = input("\nEnter the title of a book you want to remove: ")
+  search_input = search_input.strip()
   # Iterating the list
   for book in books_list:
     # Checking if the input title is present in the list
@@ -170,7 +198,7 @@ def library():
             elif user_input == 5:
                 display_statistics()
             elif user_input == 6:
-                print("Library saved to file. Goodbye!")
+                save_books(books_list)
                 break    
             else: 
                 print("\nEnter a valid option!")

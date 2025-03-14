@@ -72,6 +72,7 @@ def search_book():
 
 ##  ##  ##  ##  Function to display statistics  ##  ##  ##
 def display_statistics():
+    print("\n==== BOOKS STATS ====")
     books_read = 0
     # Iterating the list to get read books quantity.
     for book in books_list:
@@ -96,11 +97,11 @@ Percentage read: {read_percentage:.2f}%
 def list_all_books():
     # Checking if the list isn't empty.
     if books_list:
-        print(f"\nBooks quantity: {len(books_list)}")
+        print(f"\n\tBooks quantity: {len(books_list)}")
         
         # Using enumerate to loop through the list and get the index
         for index, book in enumerate(books_list, start=1):
-            print(f"\t{index}. {book['title']} by {book['author']} ({book['publish_year']}) - {book['genre']}, {book['is_read']}")
+            print(f"\t\t{index}. {book['title']} by {book['author']} ({book['publish_year']}) - {book['genre']}, {book['is_read']}")
     
     # Error if the library is empty
     else:
@@ -110,6 +111,7 @@ def list_all_books():
 
 ##  ##  ##  ##  Function to add a book  ##  ##  ##
 def add_book():
+    print("\n==== ADD A BOOK ====")
     title: str = input("Enter the Book Title: ")
     # Stripping whitespaces from left and right of the strings.
     title = title.strip()
@@ -153,27 +155,28 @@ def add_book():
 
 ##  ##  ##  ##  Function to remove a book  ##  ##  ##
 def remove_book():
-  # Getting input to remove the book
-  search_input: str = input("\nEnter the title of a book you want to remove: ")
-  search_input = search_input.strip()
-  # Iterating the list
-  for book in books_list:
-    # Checking if the input title is present in the list
-    if book["title"] == search_input:
-        # Removing the book from the list.
-        books_list.remove(book)
-        print("Book is removed! The new list of book is: ")
-        list_all_books()
-    # Eror if the input title is not present in the list.
-    else:
-        print("Book not found!")
+    print("\n==== REMOVE A BOOK ====")
+    # Getting input to remove the book
+    search_input: str = input("\nEnter the title of a book you want to remove: ")
+    search_input = search_input.strip()
+    # Iterating the list
+    for book in books_list:
+        # Checking if the input title is present in the list
+        if book["title"] == search_input:
+            # Removing the book from the list.
+            books_list.remove(book)
+            print("Book is removed! The new list of books is: ")
+            list_all_books()
+            # Eror if the input title is not present in the list.
+        else:
+            print("Book not found!")
 
 
 
 ##  ##  ##  ##  Library Initializer  ##  ##  ##
 def library():
     
-    print("\nWelcome to your Personal Library Manager!")
+    print("\n==== WELCOME TO YOUR PERSONAL LIBRARY MANAGER! ====")
     while True:
         print("""
 1. Add a book.

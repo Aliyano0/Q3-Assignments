@@ -17,6 +17,7 @@ books_list = load_books()
 def save_books(books):
     with open(DATA_FILE, "w") as file:
         json.dump(books, file, indent=4)
+    print("Books saved successfully in a file!")
 
 
 ##  ##  ##  ##  Function to search book  ##  ##  ##

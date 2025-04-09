@@ -1,0 +1,20 @@
+version = 1
+revision = 1
+requires-python = ">=3.13"
+
+[[package]]
+name = "03-erase-canvas"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "graphics-py" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "graphics-py", specifier = ">=5.0.1.post1" }]
+
+[[package]]
+name = "graphics-py"
+version = "5.0.1.post1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/66/f5/7d4afbf6dd02ff03be3b8954e0e7015ba8acbbf3492bdd75c061f9b80b46/graphics.py-5.0.1.post1.tar.gz", hash = "sha256:583561cc577447e452fb2b1352c0fc615396b12b30dfbbce48e8190d2e330a97", size = 9590 }

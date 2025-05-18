@@ -131,8 +131,13 @@ elif choice == "Sign Up":
                     "password": hash_passkey(password),
                     "data": []
                 }
+                st.session_state.login_username = username
                 save_data(stored_data)
-                st.success("✅ User registered successfully!")
+                st.success("✅ User registered successfully! Redirecting to HomePage...")
+                time.sleep(1)
+                st.session_state.selection = 0 
+                st.rerun()
+                st.button("Go to HomePage", on_click=lambda: onclick("Home"), key="homebtn") 
         else:
             st.error("Both fields are required.")
 

@@ -8,5 +8,5 @@ class Employee:
 
 new_employee = Employee()
 print(new_employee.name) # It prints the public variable.
-print(new_employee._salary) # It prints the private variable. 
+print(new_employee._salary) # It prints the protected variable. 
 print(new_employee.__ssn) # Accessing Private variable throws an attribute error because we can access it within the Class or we can also access it through a class method.(Getter method)
